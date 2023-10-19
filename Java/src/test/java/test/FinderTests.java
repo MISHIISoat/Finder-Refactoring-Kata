@@ -1,18 +1,19 @@
 package test;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import org.junit.Before;
-import org.junit.Test;
-
 import algorithm.F;
 import algorithm.FT;
 import algorithm.Finder;
 import algorithm.Thing;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class FinderTests {
 
@@ -22,15 +23,16 @@ public class FinderTests {
     Thing mike = new Thing();
 
     @Before
-    public void setup() {
+    public void setup() throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         sue.name = "Sue";
-        sue.birthDate = new Date(50, 0, 1);
+        sue.birthDate = formatter.parse("1950-01-01");
         greg.name = "Greg";
-        greg.birthDate = new Date(52, 5, 1);
+        greg.birthDate = formatter.parse("1952-05-01");
         sarah.name = "Sarah";
-        sarah.birthDate = new Date(82, 0, 1);
+        sarah.birthDate = formatter.parse("1982-01-01");
         mike.name = "Mike";
-        mike.birthDate = new Date(79, 0, 1);
+        mike.birthDate = formatter.parse("1979-01-01");
     }
 
     @Test
@@ -40,8 +42,8 @@ public class FinderTests {
 
         F result = finder.Find(FT.One);
 
-        assertEquals(null, result.P1);
-        assertEquals(null, result.P2);
+        assertNull(result.P1);
+        assertNull(result.P2);
     }
 
     @Test
@@ -53,8 +55,8 @@ public class FinderTests {
 
         F result = finder.Find(FT.One);
 
-        assertEquals(null, result.P1);
-        assertEquals(null, result.P2);
+        assertNull(result.P1);
+        assertNull(result.P2);
     }
 
     @Test
