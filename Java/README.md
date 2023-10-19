@@ -32,3 +32,7 @@ Lean on the tests and run them after every small change to make sure you are on 
 ## How to End
 
 You can stop when you feel the code is good enough, something you can come back to in 6 months and understand.
+
+## Continue
+
+You can implement new features after refactoring
