@@ -1,9 +1,9 @@
 package test;
 
-import algorithm.F;
-import algorithm.FT;
+import algorithm.Couple;
+import algorithm.ExtremityAge;
 import algorithm.Finder;
-import algorithm.Thing;
+import algorithm.Person;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,10 +17,10 @@ import static org.junit.Assert.assertNull;
 
 public class FinderTests {
 
-    Thing sue = new Thing();
-    Thing greg = new Thing();
-    Thing sarah = new Thing();
-    Thing mike = new Thing();
+    Person sue = new Person();
+    Person greg = new Person();
+    Person sarah = new Person();
+    Person mike = new Person();
 
     @Before
     public void setup() throws ParseException {
@@ -37,82 +37,82 @@ public class FinderTests {
 
     @Test
     public void returns_Empty_Results_When_Given_Empty_List() {
-        List<Thing> list = new ArrayList<>();
+        List<Person> list = new ArrayList<>();
         Finder finder = new Finder(list);
 
-        F result = finder.Find(FT.One);
+        Couple result = finder.find(ExtremityAge.ClosestAge);
 
-        assertNull(result.P1);
-        assertNull(result.P2);
+        assertNull(result.oldestPerson);
+        assertNull(result.youngestPerson);
     }
 
     @Test
     public void returns_Empty_Results_When_Given_One_FT() {
-        List<Thing> list = new ArrayList<>();
+        List<Person> list = new ArrayList<>();
         list.add(sue);
 
         Finder finder = new Finder(list);
 
-        F result = finder.Find(FT.One);
+        Couple result = finder.find(ExtremityAge.ClosestAge);
 
-        assertNull(result.P1);
-        assertNull(result.P2);
+        assertNull(result.oldestPerson);
+        assertNull(result.youngestPerson);
     }
 
     @Test
     public void returns_One_Two_For_Two_FTs() {
-        List<Thing> list = new ArrayList<>();
+        List<Person> list = new ArrayList<>();
         list.add(sue);
         list.add(greg);
         Finder finder = new Finder(list);
 
-        F result = finder.Find(FT.One);
+        Couple result = finder.find(ExtremityAge.ClosestAge);
 
-        assertEquals(sue, result.P1);
-        assertEquals(greg, result.P2);
+        assertEquals(sue, result.oldestPerson);
+        assertEquals(greg, result.youngestPerson);
     }
 
     @Test
     public void returns_Two_Two_For_Two_FTs() {
-        List<Thing> list = new ArrayList<>();
+        List<Person> list = new ArrayList<>();
         list.add(mike);
         list.add(greg);
         Finder finder = new Finder(list);
 
-        F result = finder.Find(FT.Two);
+        Couple result = finder.find(ExtremityAge.FarthestAges);
 
-        assertEquals(greg, result.P1);
-        assertEquals(mike, result.P2);
+        assertEquals(greg, result.oldestPerson);
+        assertEquals(mike, result.youngestPerson);
     }
 
     @Test
     public void returns_Two_Two_For_Four_FTs() {
-        List<Thing> list = new ArrayList<>();
+        List<Person> list = new ArrayList<>();
         list.add(sue);
         list.add(sarah);
         list.add(mike);
         list.add(greg);
         Finder finder = new Finder(list);
 
-        F result = finder.Find(FT.Two);
+        Couple result = finder.find(ExtremityAge.FarthestAges);
 
-        assertEquals(sue, result.P1);
-        assertEquals(sarah, result.P2);
+        assertEquals(sue, result.oldestPerson);
+        assertEquals(sarah, result.youngestPerson);
     }
 
     @Test
     public void returns_One_Two_For_Four_FTs() {
-        List<Thing> list = new ArrayList<>();
+        List<Person> list = new ArrayList<>();
         list.add(sue);
         list.add(sarah);
         list.add(mike);
         list.add(greg);
         Finder finder = new Finder(list);
 
-        F result = finder.Find(FT.One);
+        Couple result = finder.find(ExtremityAge.ClosestAge);
 
-        assertEquals(sue, result.P1);
-        assertEquals(greg, result.P2);
+        assertEquals(sue, result.oldestPerson);
+        assertEquals(greg, result.youngestPerson);
     }
 
 }

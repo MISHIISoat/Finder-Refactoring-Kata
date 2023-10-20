@@ -4,51 +4,51 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Finder {
-    private final List<Thing> _p;
+    private final List<Person> persons;
 
-    public Finder(List<Thing> p) {
-        _p = p;
+    public Finder(List<Person> persons) {
+        this.persons = persons;
     }
 
-    public F Find(FT ft) {
-        List<F> tr = new ArrayList<>();
+    public Couple find(ExtremityAge extremityAge) {
+        List<Couple> couples = new ArrayList<>();
 
-        for (int i = 0; i < _p.size() - 1; i++) {
-            for (int j = i + 1; j < _p.size(); j++) {
-                F r = new F();
-                if (_p.get(i).birthDate.getTime() < _p.get(j).birthDate.getTime()) {
-                    r.P1 = _p.get(i);
-                    r.P2 = _p.get(j);
+        for (int i = 0; i < persons.size() - 1; i++) {
+            for (int j = i + 1; j < persons.size(); j++) {
+                Couple couple = new Couple();
+                if (persons.get(i).birthDate.getTime() < persons.get(j).birthDate.getTime()) {
+                    couple.oldestPerson = persons.get(i);
+                    couple.youngestPerson = persons.get(j);
                 } else {
-                    r.P1 = _p.get(j);
-                    r.P2 = _p.get(i);
+                    couple.oldestPerson = persons.get(j);
+                    couple.youngestPerson = persons.get(i);
                 }
-                r.D = r.P2.birthDate.getTime() - r.P1.birthDate.getTime();
-                tr.add(r);
+                couple.ageDifference = couple.youngestPerson.birthDate.getTime() - couple.oldestPerson.birthDate.getTime();
+                couples.add(couple);
             }
         }
 
-        if (tr.size() < 1) {
-            return new F();
+        if (couples.size() < 1) {
+            return new Couple();
         }
 
-        F answer = tr.get(0);
-        for (F result : tr) {
-            switch (ft) {
-            case One:
-                if (result.D < answer.D) {
-                    answer = result;
+        Couple couple = couples.get(0);
+        for (Couple a : couples) {
+            switch (extremityAge) {
+            case ClosestAge:
+                if (a.ageDifference < couple.ageDifference) {
+                    couple = a;
                 }
                 break;
 
-            case Two:
-                if (result.D > answer.D) {
-                    answer = result;
+            case FarthestAges:
+                if (a.ageDifference > couple.ageDifference) {
+                    couple = a;
                 }
                 break;
             }
         }
 
-        return answer;
+        return couple;
     }
 }
