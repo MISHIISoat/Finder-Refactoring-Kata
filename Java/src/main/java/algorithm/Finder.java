@@ -24,15 +24,8 @@ public class Finder {
 
     for (int i = 0; i < persons.size() - 1; i++) {
       for (int j = i + 1; j < persons.size(); j++) {
-        Couple couple = new Couple();
-        if (persons.get(i).birthDate.getTime() < persons.get(j).birthDate.getTime()) {
-          couple.oldestPerson = persons.get(i);
-          couple.youngestPerson = persons.get(j);
-        } else {
-          couple.oldestPerson = persons.get(j);
-          couple.youngestPerson = persons.get(i);
-        }
-        couple.ageDifference = couple.youngestPerson.birthDate.getTime() - couple.oldestPerson.birthDate.getTime();
+        Couple couple = new Couple(persons.get(i), persons.get(j));
+
         couples.add(couple);
       }
     }
@@ -43,9 +36,9 @@ public class Finder {
     final Stream<Couple> coupleStream = couples.stream();
     return switch (extremityAge) {
       case ClosestAge -> coupleStream
-          .min(Comparator.comparing(c -> c.ageDifference));
+          .min(Comparator.comparing(Couple::getAgeDifference));
       case FarthestAges -> coupleStream
-          .max(Comparator.comparing(c -> c.ageDifference));
+          .max(Comparator.comparing(Couple::getAgeDifference));
     };
   }
 }

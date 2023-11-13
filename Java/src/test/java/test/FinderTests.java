@@ -42,8 +42,8 @@ public class FinderTests {
 
         Couple result = finder.find(ExtremityAge.ClosestAge);
 
-        assertNull(result.oldestPerson);
-        assertNull(result.youngestPerson);
+        assertNull(result.getOldestPerson());
+        assertNull(result.getYoungestPerson());
     }
 
     @Test
@@ -55,8 +55,8 @@ public class FinderTests {
 
         Couple result = finder.find(ExtremityAge.ClosestAge);
 
-        assertNull(result.oldestPerson);
-        assertNull(result.youngestPerson);
+        assertNull(result.getOldestPerson());
+        assertNull(result.getYoungestPerson());
     }
 
     @Test
@@ -68,8 +68,8 @@ public class FinderTests {
 
         Couple result = finder.find(ExtremityAge.ClosestAge);
 
-        assertEquals(sue, result.oldestPerson);
-        assertEquals(greg, result.youngestPerson);
+        assertEquals(sue, result.getOldestPerson());
+        assertEquals(greg, result.getYoungestPerson());
     }
 
     @Test
@@ -81,8 +81,8 @@ public class FinderTests {
 
         Couple result = finder.find(ExtremityAge.FarthestAges);
 
-        assertEquals(greg, result.oldestPerson);
-        assertEquals(mike, result.youngestPerson);
+        assertEquals(greg, result.getOldestPerson());
+        assertEquals(mike, result.getYoungestPerson());
     }
 
     @Test
@@ -96,8 +96,8 @@ public class FinderTests {
 
         Couple result = finder.find(ExtremityAge.FarthestAges);
 
-        assertEquals(sue, result.oldestPerson);
-        assertEquals(sarah, result.youngestPerson);
+        assertEquals(sue, result.getOldestPerson());
+        assertEquals(sarah, result.getYoungestPerson());
     }
 
     @Test
@@ -111,8 +111,8 @@ public class FinderTests {
 
         Couple result = finder.find(ExtremityAge.ClosestAge);
 
-        assertEquals(sue, result.oldestPerson);
-        assertEquals(greg, result.youngestPerson);
+        assertEquals(sue, result.getOldestPerson());
+        assertEquals(greg, result.getYoungestPerson());
     }
 
 }
