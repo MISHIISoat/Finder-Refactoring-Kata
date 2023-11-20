@@ -1,5 +1,5 @@
 package algorithm;
 
 public enum ExtremityAge {
-    ClosestAge, FarthestAges
+    ClosestAges, FarthestAges
 }

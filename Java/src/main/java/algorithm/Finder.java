@@ -35,7 +35,7 @@ public class Finder {
   private static Optional<Couple> findByExtremityAge(ExtremityAge extremityAge, List<Couple> couples) {
     final Stream<Couple> coupleStream = couples.stream();
     return switch (extremityAge) {
-      case ClosestAge -> coupleStream
+      case ClosestAges -> coupleStream
           .min(Comparator.comparing(Couple::getAgeDifference));
       case FarthestAges -> coupleStream
           .max(Comparator.comparing(Couple::getAgeDifference));
