@@ -18,15 +18,20 @@ public class Couple {
         this.ageDifference = this.youngestPerson.birthDate().getTime() - this.oldestPerson.birthDate().getTime();
     }
 
-    public Person getOldestPerson() {
+    public Person getSecondPerson() {
         return oldestPerson;
     }
 
-    public Person getYoungestPerson() {
+    public Person getFirstPerson() {
         return youngestPerson;
     }
 
     public long getAgeDifference() {
         return ageDifference;
+    }
+
+    public String getClosestNameToA() {
+        List<Person> persons = List.of(oldestPerson, youngestPerson);
+        return persons.stream().min(Comparator.comparing(Person::name)).get().name();
     }
 }

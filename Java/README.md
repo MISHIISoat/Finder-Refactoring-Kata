@@ -35,4 +35,5 @@ You can stop when you feel the code is good enough, something you can come back 
 
 ## Continue
 
-You can implement new features after refactoring
+1. Implement test to find couple order by first letter name close to 'A', and the first person should be closest to letter 'A' than the second.
+2. Implement test to find couple order by first letter name close to 'Z'

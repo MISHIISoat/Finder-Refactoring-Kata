@@ -13,10 +13,26 @@ public class Finder {
     this.persons = persons;
   }
 
-  public Couple find(ExtremityAge extremityAge) {
+  public Couple find(FilterCategory filterCategory) {
     List<Couple> couples = getCouples();
 
-    return findByExtremityAge(extremityAge, couples).orElse(new Couple());
+    final Stream<Couple> coupleStream = couples.stream();
+    return (switch (filterCategory) {
+      case ClosestAges -> findClosestAges(coupleStream);
+      case FarthestAges -> findFarthestAges(coupleStream);
+      case ClosestNameToA -> coupleStream
+          .min(Comparator.comparing(Couple::getClosestNameToA));
+    }).orElse(new Couple());
+  }
+
+  private static Optional<Couple> findFarthestAges(Stream<Couple> coupleStream) {
+    return coupleStream
+        .max(Comparator.comparing(Couple::getAgeDifference));
+  }
+
+  private static Optional<Couple> findClosestAges(Stream<Couple> coupleStream) {
+    return coupleStream
+        .min(Comparator.comparing(Couple::getAgeDifference));
   }
 
   private List<Couple> getCouples() {
@@ -32,13 +48,4 @@ public class Finder {
     return couples;
   }
 
-  private static Optional<Couple> findByExtremityAge(ExtremityAge extremityAge, List<Couple> couples) {
-    final Stream<Couple> coupleStream = couples.stream();
-    return switch (extremityAge) {
-      case ClosestAges -> coupleStream
-          .min(Comparator.comparing(Couple::getAgeDifference));
-      case FarthestAges -> coupleStream
-          .max(Comparator.comparing(Couple::getAgeDifference));
-    };
-  }
 }

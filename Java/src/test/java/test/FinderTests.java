@@ -1,7 +1,7 @@
 package test;
 
 import algorithm.Couple;
-import algorithm.ExtremityAge;
+import algorithm.FilterCategory;
 import algorithm.Finder;
 import algorithm.Person;
 import org.junit.Before;
@@ -36,10 +36,10 @@ public class FinderTests {
         List<Person> list = new ArrayList<>();
         Finder finder = new Finder(list);
 
-        Couple result = finder.find(ExtremityAge.ClosestAges);
+        Couple result = finder.find(FilterCategory.ClosestAges);
 
-        assertNull(result.getOldestPerson());
-        assertNull(result.getYoungestPerson());
+        assertNull(result.getSecondPerson());
+        assertNull(result.getFirstPerson());
     }
 
     @Test
@@ -49,10 +49,10 @@ public class FinderTests {
 
         Finder finder = new Finder(list);
 
-        Couple result = finder.find(ExtremityAge.ClosestAges);
+        Couple result = finder.find(FilterCategory.ClosestAges);
 
-        assertNull(result.getOldestPerson());
-        assertNull(result.getYoungestPerson());
+        assertNull(result.getSecondPerson());
+        assertNull(result.getFirstPerson());
     }
 
     @Test
@@ -62,10 +62,10 @@ public class FinderTests {
         list.add(greg);
         Finder finder = new Finder(list);
 
-        Couple result = finder.find(ExtremityAge.ClosestAges);
+        Couple result = finder.find(FilterCategory.ClosestAges);
 
-        assertNotNull(result.getOldestPerson());
-        assertNotNull(result.getYoungestPerson());
+        assertNotNull(result.getSecondPerson());
+        assertNotNull(result.getFirstPerson());
     }
 
     @Test
@@ -76,10 +76,10 @@ public class FinderTests {
 
         Finder finder = new Finder(list);
 
-        Couple result = finder.find(ExtremityAge.ClosestAges);
+        Couple result = finder.find(FilterCategory.ClosestAges);
 
-        assertEquals(sue, result.getOldestPerson());
-        assertEquals(greg, result.getYoungestPerson());
+        assertEquals(sue, result.getSecondPerson());
+        assertEquals(greg, result.getFirstPerson());
     }
 
     @Test
@@ -89,10 +89,10 @@ public class FinderTests {
         list.add(greg);
         Finder finder = new Finder(list);
 
-        Couple result = finder.find(ExtremityAge.FarthestAges);
+        Couple result = finder.find(FilterCategory.FarthestAges);
 
-        assertEquals(greg, result.getOldestPerson());
-        assertEquals(mike, result.getYoungestPerson());
+        assertEquals(greg, result.getSecondPerson());
+        assertEquals(mike, result.getFirstPerson());
     }
 
     @Test
@@ -104,10 +104,10 @@ public class FinderTests {
         list.add(greg);
         Finder finder = new Finder(list);
 
-        Couple result = finder.find(ExtremityAge.FarthestAges);
+        Couple result = finder.find(FilterCategory.FarthestAges);
 
-        assertEquals(sue, result.getOldestPerson());
-        assertEquals(sarah, result.getYoungestPerson());
+        assertEquals(sue, result.getSecondPerson());
+        assertEquals(sarah, result.getFirstPerson());
     }
 
     @Test
@@ -119,10 +119,24 @@ public class FinderTests {
         list.add(greg);
         Finder finder = new Finder(list);
 
-        Couple result = finder.find(ExtremityAge.ClosestAges);
+        Couple result = finder.find(FilterCategory.ClosestAges);
 
-        assertEquals(sue, result.getOldestPerson());
-        assertEquals(greg, result.getYoungestPerson());
+        assertEquals(sue, result.getSecondPerson());
+        assertEquals(greg, result.getFirstPerson());
     }
 
+    @Test
+    public void returns_Couple_With_Person_Name_First_Letter_As_Close_As_Possible_To_A() {
+        List<Person> list = new ArrayList<>();
+        list.add(sue);
+        list.add(sarah);
+        list.add(mike);
+        list.add(greg);
+        Finder finder = new Finder(list);
+
+        Couple result = finder.find(FilterCategory.ClosestNameToA);
+
+        assertEquals(greg, result.getFirstPerson());
+        assertEquals(mike, result.getSecondPerson());
+    }
 }
